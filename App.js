@@ -1,11 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight } from 'react-native';
+import { useState } from 'react';
+import {Provider} from 'react-redux'
+import { StyleSheet, Text, View, TextInput, Button, } from 'react-native';
 
 export default function App() {
-  const _handlePress = () => {
-    console.log('clicked again')
-  }
+  const [metal,setMetal] = useState('')
+  const [topCount,setTopCount] = useState(0)
+  const [bottomCount,setBottomCount] = useState(0)
+  const [name,setName] = useState('')
+  const [phone,setPhone] = useState('')
   return (
+    <Provider store={store}>
     <View style={styles.container}>
       <View ><Text style={styles.header}>Homeboy</Text></View>
       <View style={styles.metals} name='metals'>
@@ -13,14 +18,14 @@ export default function App() {
         <button><Text>8k Yellow Gold</Text></button>
         <button><Text>10k Yellow Gold</Text></button>
         <button><Text>14k Yellow Gold</Text></button>
+        <button><Text>18k Yellow Gold</Text></button>
+        <button><Text>22k Yellow Gold</Text></button>
         <button><Text>White Gold</Text></button>
       </View>
       <View name='teeth'>
         <View name='top' style={styles.rows}>
-          <TouchableHighlight onPress={_handlePress} >
-            <Button
-            title='X'></Button>
-          </TouchableHighlight>
+          
+          <button onTouchStart={() => {console.log('clicked')}} style={{width:'25px',height:'25px'}}></button>
           <button onTouchStart={() => {console.log('clicked')}} style={{width:'25px',height:'25px'}}></button>
           <button onTouchStart={() => {console.log('clicked')}} style={{width:'25px',height:'25px'}}></button>
           <button onTouchStart={() => {console.log('clicked')}} style={{width:'25px',height:'25px'}}></button>
@@ -57,10 +62,12 @@ export default function App() {
         <Text style={styles.titles}>Price:$</Text>
       </View>
       <View style={styles.textholder}>
-        <Text style={styles.titles}>Name:</Text>
-        <Text style={styles.titles}>Phone:</Text>
+        <Text style={styles.titles}>Name:<TextInput style={styles.inputs}/></Text>
+        <Text style={styles.titles}>Phone:<TextInput style={styles.inputs}/></Text>
       </View>
+      <button><Text>Checkout</Text></button>
     </View>
+    </Provider>
   );
 }
 
@@ -97,6 +104,15 @@ const styles = StyleSheet.create({
   },
   textholder:{
     marginTop:'20px',
+  },
+  inputs:{
+    border:'2px solid gray',
+    backgroundColor:'white',
+    borderRadius:'5%',
+    margin:'2px'
+  },
+  checkoutButton:{
+    marginTop:'20px'
   }
 
 });
