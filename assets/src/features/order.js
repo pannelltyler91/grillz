@@ -2,8 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const orderSlice = createSlice({
   name: "order",
-  initialState: { metal:'empty', topCount:0,bottomCount:0, design:'empty',customer:{} },
+  initialState: {total:0, order:[] },
   reducers: {
+    selectKarat: (state, action) => {
+      let choice = action.payload
+      console.log(state.order)
+
+    },
     selectMetal: (state, action) => {
       let choice = action.payload
       console.log(choice)
@@ -20,15 +25,12 @@ export const orderSlice = createSlice({
         let choice = action.payload
         console.log(choice)
     },
-    setCustomer:(state,action) =>{
-        let customerInfo = action.payload
-        console.log(customerInfo)
-    },
     checkout:(state,action) =>{
         let order = action.payload
         console.log(order)
-    }
+    },
+
   },
 });
-export const { selectBottomTeeth,selectDesign,selectMetal,selectTopTeeth,setCustomer,checkout } = orderSlice.actions;
+export const { selectBottomTeeth,selectDesign,selectKarat,selectTopTeeth,checkout,selectMetal } = orderSlice.actions;
 export default orderSlice.reducer;
